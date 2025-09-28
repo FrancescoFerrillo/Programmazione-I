@@ -1,0 +1,57 @@
+
+body {
+    background-image: url(back.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+}
+
+div {
+    overflow:scroll; 
+    width: 1200px; 
+    height: 600px;
+    background-color:rgba(0,0,0,0.7);
+    border: solid;
+    border-color: rgba(5,5,5,0.5);
+    border-style: outset;
+    border-radius: 30px;
+    flex-direction: row-reverse;
+    margin-left: 200px;
+    overflow-y: visible; 
+    overflow-x: hidden;
+}
+
+.scroll-bar{
+    height: 100%;
+    width: 1500px;
+    border: 1px solid gray;
+    font-family: sans-serif;
+    overflow: auto;
+}
+
+::-webkit-scrollbar{
+    width: 10px;
+}
+
+::-webkit-scrollbar-track{
+    border: 1px solid #000;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background: #000;
+    border-radius: 8px;
+}
+
+::-webkit-scrollbar-thumb:hover{
+    background: #808080;
+}
+
+h2 {
+    font-family: arial, verdana, tahona, sans-serif;
+    font-size: 30px;
+    line-height: 150%;
+    color: #FFF;
+    text-shadow: -1px 0 #000, 0 1px #000, 1px 0 #000, 0 -1px #000;
+}

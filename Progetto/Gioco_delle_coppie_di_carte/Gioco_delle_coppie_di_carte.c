@@ -1,0 +1,140 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+
+typedef enum{
+    bastoni,spade,coppe,denari
+    }Semi;
+
+
+struct carta{
+    int valore;
+    Semi seme;
+};
+
+typedef struct carta Carta;
+
+//dichiarazioni function
+void mischiare(Carta mazzo[],int n_carte,int mix);
+void scambiare(Carta mazzo[],int i, int j);
+
+//function per mischiare le carte
+void mischiare(Carta mazzo[],int n_carte,int mix){
+    int i,j,k;
+    for(k=1;k<=mix*n_carte;k++){
+        i=rand()%n_carte;
+        j=rand()%n_carte;
+        scambiare(mazzo,i,j);
+    }
+}
+
+//function per mischiare le carte
+void scambiare(Carta mazzo[],int i,int j){
+    Carta temp;
+    temp=mazzo[i];
+    mazzo[i]=mazzo[j];
+    mazzo[j]=temp;
+    printf("%d %d\t",mazzo[i],mazzo[j]);
+}
+
+//main per il funzionamento del gioco
+int main(){
+    int inz,i,j,puntitot,mix;
+    int puntigiocatoreuno=0,puntigiocatoredue=0,n_carte=40,f=0;
+    char giocatoreuno[11], giocatoredue[11];
+
+    Carta mazzo[40]={
+    {1,bastoni},{2,bastoni},{3,bastoni},{4,bastoni},{5,bastoni},{6,bastoni},{7,bastoni},{8,bastoni},{9,bastoni},{10,bastoni},
+    {1,denari},{2,denari},{3,denari},{4,denari},{5,denari},{6,denari},{7,denari},{8,denari},{9,denari},{10,denari},
+    {1,coppe},{2,coppe},{3,coppe},{4,coppe},{5,coppe},{6,coppe},{7,coppe},{8,coppe},{9,coppe},{10,coppe},
+    {1,spade},{2,spade},{3,spade},{4,spade},{5,spade},{6,spade},{7,spade},{8,spade},{9,spade},{10,spade}
+    };
+
+    printf("Inserire il nome del primo giocatore : \n");
+    scanf("%s",giocatoreuno);
+    printf("Inserire il nome del secondo giocatore : \n");
+    scanf("%s",giocatoredue);
+    
+    printf("Quante volte vuoi mischiare il mazzo? : \n");
+    scanf("%d",&mix);
+    mischiare(mazzo,n_carte,mix);
+    system("cls");
+    inz = rand()%2;
+
+    if(inz==0){
+        printf("\nIl primo a giocare e': %s\n",giocatoreuno);
+    }
+    else{
+        printf("\nIl primo giocatore e': %s\n",giocatoredue);
+    }
+
+    do{
+            printf("le carte sono mischiate e coperte:\n ");
+            for(f=0;f<=39;f++){
+            if(mazzo[f].valore==0)
+                continue;
+            else
+                printf("%3d\t",f);
+            if (f==40)
+            printf("\n");
+        }
+        if(inz==0){
+            printf("\n%s scegli la posizione della prima carta : \n",giocatoreuno);
+            scanf("%d",&i);
+            while(mazzo[i].valore==0){
+                printf("la carta e' gia stata scelta\n");
+                scanf("%d",&i);
+            }
+            printf("La carta scelta e': %d, %d\n",mazzo[i].valore,mazzo[i].seme);
+            printf("%s scegli la posizione della seconda carta : \n",giocatoreuno);
+            scanf("%d",&j);
+            while(mazzo[j].valore==0){
+                printf("la carta e' gia stata scelta\n");
+                scanf("%d",&j);
+            }
+            printf("La carta scelta e': %d, %d\n",mazzo[j].valore,mazzo[j].seme);
+        }
+        else{
+            printf("\n%s scegli la posizione della prima carta : \n",giocatoredue);
+            scanf("%d",&i);
+            while(mazzo[i].valore==0){
+                printf("la carta e' gia stata scelta\n");
+                scanf("%d",&i);
+            }
+
+            printf("La carta scelta e' %d, %d\n",mazzo[i].valore,mazzo[i].seme);
+            printf("%s scegli la posizione della seconda carta : \n",giocatoredue);
+            scanf("%d",&j);
+            while(mazzo[j].valore==0){
+                printf("la carta e' gia stata scelta\n");
+                scanf("%d",&j);
+            }
+            printf("La carta scelta e': %d, %d\n",mazzo[j].valore,mazzo[j].seme);
+        }
+        if(mazzo[i].valore==mazzo[j].valore){
+            printf("Le due carte sono uguali!\n hai ricevuto un punto\n");
+            if(inz==0){
+                puntigiocatoreuno++;
+            }
+            else{
+                puntigiocatoredue++;
+                mazzo[i].valore=0;
+                mazzo[j].valore=0;
+            }
+        }
+        else{
+            printf("Le due carte non sono uguali! Il tuo turno e' finito.\n");
+            if(inz==0){
+                inz=1;
+            }
+            else{
+                inz=0;
+            }
+        }
+        puntitot=puntigiocatoreuno+puntigiocatoredue;
+    }while(puntitot<11);
+    printf("\n HAI VINTO IL GIOCO CON 11 PUNTI COMPLIMENTI!!\n" );
+    scanf("%d",&inz);
+    return 0;
+}
