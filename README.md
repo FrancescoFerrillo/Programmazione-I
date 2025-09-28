@@ -13,8 +13,6 @@
 - [Getting Started](#getting-started)  
 - [Compilation and Running (C programs)](#compilation-and-running-c-programs)  
 - [Viewing HTML Files](#viewing-html-files)  
-- [How to Contribute](#how-to-contribute)  
-- [License](#license)  
 
 ## Overview
 
